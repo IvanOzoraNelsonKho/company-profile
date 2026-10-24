@@ -1,69 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import ServiceCard from "@/components/ServiceCard";
+import { services } from "@/data/services";
+
+const stats = [
+  { value: "50+", label: "Proyek Selesai" },
+  { value: "30+", label: "Klien Puas" },
+  { value: "5", label: "Tahun Pengalaman" },
+  { value: "10+", label: "Anggota Tim" },
+];
+
+const reasons = [
+  {
+    icon: "⚡",
+    title: "Cepat",
+    text: "Pengerjaan tepat waktu dengan proses yang jelas.",
+  },
+  {
+    icon: "🛡️",
+    title: "Terpercaya",
+    text: "Kualitas terjaga dan dukungan purna jual.",
+  },
+  {
+    icon: "🤝",
+    title: "Kolaboratif",
+    text: "Kami mendengar kebutuhan Anda di setiap tahap.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
+    <>
+      <section className="hero">
+        <div className="container hero-content">
+          <span className="badge">Mitra Teknologi Anda</span>
+          <h1>Solusi Digital untuk Bisnis Anda</h1>
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            Maju Digital membantu bisnis tumbuh lewat website dan aplikasi yang
+            modern, cepat, dan mudah digunakan.
           </p>
+          <div className="hero-buttons">
+            <Link href="/services" className="button">
+              Lihat Layanan
+            </Link>
+            <Link href="/contact" className="button button-outline">
+              Hubungi Kami
+            </Link>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="container stats">
+        {stats.map((s) => (
+          <div key={s.label} className="stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="container section">
+        <h2 className="section-title">Layanan Kami</h2>
+        <p className="section-subtitle">
+          Solusi lengkap untuk kebutuhan digital bisnis Anda.
+        </p>
+        <div className="grid">
+          {services.map((s) => (
+            <ServiceCard key={s.slug} service={s} />
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="section section-gray">
+        <div className="container">
+          <h2 className="section-title">Kenapa Memilih Kami?</h2>
+          <div className="grid">
+            {reasons.map((r) => (
+              <div key={r.title} className="card card-center">
+                <div className="card-icon">{r.icon}</div>
+                <h3>{r.title}</h3>
+                <p>{r.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container section">
+        <div className="cta">
+          <h2>Siap memulai proyek Anda?</h2>
+          <p>Ceritakan kebutuhan Anda, kami bantu wujudkan.</p>
+          <Link href="/contact" className="button button-light">
+            Hubungi Kami
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
